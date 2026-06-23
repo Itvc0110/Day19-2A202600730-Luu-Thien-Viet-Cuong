@@ -1,28 +1,24 @@
 # Reflection — Lab 19
 
-**Tên:** _<Họ Tên>_
-**Cohort:** _<A20-K1 / A20-K2 / ...>_
-**Path đã chạy:** _<lite | docker | both>_
+**Tên:** Luu Thien Viet Cuong
+**Cohort:** A20
+**Path đã chạy:** lite
 
 ---
 
 ## Câu hỏi (≤ 200 chữ)
 
-> Trên golden set 50 queries, mode nào thắng ở loại query nào (`exact` /
-> `paraphrase` / `mixed`), và tại sao? Khi nào bạn **không** dùng hybrid
-> (i.e. khi nào pure BM25 hoặc pure vector là lựa chọn đúng)?
-
-_Answer here._
+Trên golden set, hybrid có Precision@10 trung bình cao nhất vì RRF cộng tín hiệu từ BM25 và vector theo rank 1-based. Với `exact`, BM25 rất mạnh vì query chứa đúng thuật ngữ như Kubernetes, OAuth, PostgreSQL. Với `mixed`, hybrid tốt hơn vì query có cả keyword kỹ thuật và phần diễn giải tiếng Việt. Với `paraphrase`, vector hữu ích hơn keyword, nhưng model `bge-small-en` chưa tối ưu tiếng Việt nên hybrid vẫn giúp ổn định kết quả. Tôi sẽ không dùng hybrid khi hệ thống chỉ tìm mã lỗi, tên API, ID, hoặc log token chính xác; lúc đó BM25 đơn giản hơn, nhanh hơn, và dễ debug hơn.
 
 ---
 
 ## Điều ngạc nhiên nhất khi làm lab này
 
-_(Optional, 1–2 câu)_
+Hybrid không cần score gốc cùng scale; chỉ cần rank từ từng retriever là đã cải thiện độ ổn định.
 
 ---
 
 ## Bonus challenge
 
-- [ ] Đã làm bonus (xem `bonus/`)
-- [ ] Pair work với: _<tên đồng đội nếu có>_
+- [x] Đã làm bonus (xem `bonus/`)
+- [x] Pair work với: Nguyen Hoai Bao Ngoc
